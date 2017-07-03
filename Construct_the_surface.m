@@ -1,9 +1,9 @@
-function [N_x,p,X_target,check]=Construct_the_surface(limits)
+function [N_x,p,X_target,check]=Construct_the_surface(options)
 
 screensize = get( 0, 'Screensize' );
 fig = figure();
 set(fig,'Position',screensize)
-
+limits=options.limits;
 % limits=[limits(1) limits(2) 0 limits(4)];
 [Datat_Wall,~]=generate_mouse_data(limits,0,0,'Draw the wall',fig);
 p = polyfit(Datat_Wall(1,:),Datat_Wall(2,:),1);

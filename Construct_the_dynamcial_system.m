@@ -1,7 +1,8 @@
-function [A,Dem_i,check]=Construct_the_dynamcial_system(N_x,Poly,X_target,limits)
+function [A,Dem_i,check]=Construct_the_dynamcial_system(Poly,X_target,option)
 
 clc
 close all
+limits=option.limits;
 X(1,:) = linspace(limits(1,1),limits(1,2),10^5);
 X(2,:) = Poly(1)*X+Poly(2);
 screensize = get( 0, 'Screensize' );
@@ -26,17 +27,9 @@ set(legend1,'Interpreter','latex','FontSize',20);
 d=2;
 C=[];
 
-% P = sdpvar(2*d,2*d);
-% A = [zeros(d,d)  eye(d,d); sdpvar(d,d,'full') sdpvar(d,d,'full')];
-% C=[transpose(A)*P+P*A<= -0.0001*eye(2*d,2*d)];
-% C=C+[0.0001*eye(2*d,2*d)<=P];
-% Fun=(A*Data(1:2*d,:));
-% diff=Fun(d+1:2*d,:)-Data(3*d+1:4*d,:);
-% P = sdpvar(d,d);
 Omega1=sdpvar(1,1);
 A = [Omega1 0;0 Omega1];
 C=C+[Omega1<= -0.0001];
-% C=C+[0.0001*eye(d,d)<=P];
 Fun=(A*Data(1:d,:));
 diff=Fun(1:d,:)-Data(d+1:2*d,:);
 
@@ -53,10 +46,5 @@ else
     disp('The dynamical system is successfully constructed!')
     check=1;
 end
-Time=sol.solvertime;
 A= 10*value(A);
 A = [zeros(d,d)  eye(d,d); A [-2*sqrt(-A(1,1)) 0;0 -2*sqrt(-A(2,2))]];
-% A(1+2,1)=-abs(A(1+2,1))*abs(N_x(1));
-% A(1+2,2)=(A(1+2,2))*abs(N_x(1));
-% A(2+2,1)=(A(2+2,1))*abs(N_x(2));
-% A(2+2,2)=-abs(A(2+2,2))*abs(N_x(2));

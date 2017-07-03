@@ -1,18 +1,24 @@
-function [DDX,DX,X,F,Time]=simulate_modulated_system(A,N_X,Poly,X_initial,X_target,X_C,X_L)
+function [DDX,DX,X,F,Time]=simulate_modulated_system(A,N_X,Poly,X_initial,X_target,X_C,X_L,option)
+
+
 
 clc
  disp('Simulating the modulated dynamical system from the initial positions to the target. It might take some time, please be patient.')
 
 for j=1:size(X_initial,2)
-    [DDX{j},DX{j},X{j},F{j},Time{j}] = simulate(X_initial(:,j),A,X_target,X_C,X_L,Poly,N_X);
+    [DDX{j},DX{j},X{j},F{j},Time{j}] = simulate(X_initial(:,j),A,X_target,X_C,X_L,Poly,N_X,option);
 end
 
 end
 
-function [DDX,DX,X,F,Time]=simulate(X_initial,A,X_target,X_C,X_L,Poly,N_X)
+function [DDX,DX,X,F,Time]=simulate(X_initial,A,X_target,X_C,X_L,Poly,N_X,option)
+Deltat=option.Deltat;
+F_d=option.F_d;
+delta_dx=option.delta_dx;
+T=option.Tfinal;
+
 Handle_sign=sign(-X_target(2,1)+Poly(1)*X_target(1,1)+Poly(2));
-Deltat=0.0001;
-sizeT=int64(10/Deltat);
+sizeT=int64(T/Deltat);
 DDX=zeros(size(X_initial,1)/2,sizeT+1);DX=zeros(size(X_initial,1)/2,sizeT+1);
 X=zeros(size(X_initial,1)/2,sizeT+1);
 F=zeros(size(X_initial,1)/2,sizeT+1);
@@ -25,8 +31,9 @@ Qinv=inv(Q);
 counter=1;
 A_2=A(3:4,3:4);
 A_1=A(3:4,1:2);
-F_d=8;
-delta_dx=-1;
+
+
+
 X(:,1)=X_initial(1:2,1);
 DX(:,1)=X_initial(3:4,1);
 X_mu=(X_C+X_L)/2;

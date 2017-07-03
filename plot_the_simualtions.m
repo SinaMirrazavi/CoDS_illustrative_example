@@ -1,11 +1,12 @@
-function plot_the_simualtions(DDX,DX,X,F,Time,Poly,X_initial,X_target,X_C,X_L,N_x,Limits)
+function plot_the_simualtions(DDX,DX,X,F,Time,Poly,X_initial,X_target,X_C,X_L,N_x,Option)
 
+close all
 
+Limits=Option.limits;
 
-
-
-
-plot_animation(X,Poly,X_initial,X_target,X_C,X_L,Limits)
+if (Option.animation==1)
+    plot_animation(X,Poly,X_initial,X_target,X_C,X_L,Option)
+end
 %%
 screensize = get( 0, 'Screensize' );
 fig = figure();
@@ -18,7 +19,7 @@ h2=plot(X_target(1,1),X_target(2,1),'MarkerFaceColor',[0 0 1],...
     'Marker','pentagram',...
     'LineWidth',5,...
     'LineStyle','none');
-
+hold on
 h1=plot(X_initial(1,:),X_initial(2,:),...
     'MarkerFaceColor',[0.466666668653488 0.674509823322296 0.18823529779911],...
     'MarkerEdgeColor','none',...
@@ -50,37 +51,36 @@ end
 %%
 clearvars h1 h2 h3 h4 h5 h6 h7 h8
 subplot1 = subplot(5,2,[8 10]);
-xlim([Limits(1) Limits(2)]);
 hold(subplot1,'on');
 box(subplot1,'on');
 grid(subplot1,'on');
 title('Velocity of the motion normal to the surface.')
-xlabel('$X(1)$','Interpreter','latex');
+xlabel('$Time [s]$','Interpreter','latex');
 ylabel('$Proj_{\dot{X}}$','Interpreter','latex');
 set(subplot1,'FontSize',20);
 for i=1:size(X,2)
-    h1{i} = plot(X{i}(1,:),N_x'*DX{i},'LineWidth',4,'Color',[0 0 i/size(X,2)]);
+    h1{i} = plot(Time{i}',N_x'*DX{i},'LineWidth',4,'Color',[0 0 i/size(X,2)]);
 end
 %%
 clearvars h1 h2
 subplot1 = subplot(5,2,[7 9]);
-xlim([Limits(1) Limits(2)]);
 hold(subplot1,'on');
 box(subplot1,'on');
 grid(subplot1,'on');
 set(subplot1,'FontSize',20);
 title('Force exerted by the surface to the motion.')
 for i=1:size(X,2)
-    h1{i} = plot(X{i}(1,:),N_x'*F{i},'LineWidth',4,'Color',[0 0 i/size(X,2)]);
+    h1{i} = plot(Time{i}',N_x'*F{i},'LineWidth',4,'Color',[0 0 i/size(X,2)]);
 end
-xlabel('$X(1)$','Interpreter','latex');
+xlabel('$Time [s]$','Interpreter','latex');
 ylabel('$F[N]$','Interpreter','latex');
 
 
 
 
 
-function plot_animation(X,Poly,X_initial,X_target,X_C,X_L,Limits)
+function plot_animation(X,Poly,X_initial,X_target,X_C,X_L,Option)
+Limits=Option.limits;
 close all;
 screensize = get( 0, 'Screensize' );
 fig = figure();
@@ -101,6 +101,7 @@ h1=plot(X_initial(1,:),X_initial(2,:),...
     'Marker','hexagram',...
     'LineWidth',5,...
     'LineStyle','none');
+hold on
 X_wall(1,:) = linspace(Limits(1,1),Limits(1,2),10^5);
 X_wall(2,:) = Poly(1)*X_wall+Poly(2);
 h3=plot(X_wall(1,:),X_wall(2,:),'LineWidth',4,...
@@ -132,5 +133,5 @@ while counter<SIZE
         addpoints(H_animated{i},X{i}(1,counter),X{i}(2,counter))
         drawnow
     end
-    counter=int64(counter+size(X{i},2)/500);
+    counter=int64(counter+size(X{i},2)/abs(10*Option.Tfinal));
 end
