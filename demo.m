@@ -21,8 +21,9 @@ end
 [X_C,X_L]=Select_the_contact_point(limits,Poly,X_target,X_initial);
   
  %% Simulate the unmodulated system
-[DDX_modulated,DX_modulated,X_modulated,F_modulated]=  simulate_modulated_system(A,N_x,Poly,X_initial,X_target,X_C,X_L);
  
-plot_the_simualtions(DDX_modulated,DX_modulated,X_modulated,F_modulated,Poly,X_initial,X_target,X_C,X_L,limits);
+[DDX_modulated,DX_modulated,X_modulated,F_modulated,Time_modulated]=  simulate_modulated_system(A,N_x,Poly,X_initial,X_target,X_C,X_L);
+ 
+plot_the_simualtions(DDX_modulated,DX_modulated,X_modulated,F_modulated,Time_modulated,Poly,X_initial,X_target,X_C,X_L,N_x,limits);
 % % 
-simulate_unmodulated_system(A,X_initial);
+% simulate_unmodulated_system(A,X_initial);

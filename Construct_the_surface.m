@@ -12,7 +12,7 @@ X(2,:) = p(1)*X+p(2);
 close all
 pause(0.5)
 disp('Specify the target position.')
-createfigure_with_wall(X(1,:),X(2,:),limits,'Specify the free motion side by adding one data point to that side.')
+createfigure_with_wall(X(1,:),X(2,:),limits,'Specify the target point by adding one data point to that side.')
 X_free= ginput(1)';
 X_target=X_free;
 % X_free=[0 ;0];

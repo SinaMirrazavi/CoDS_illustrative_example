@@ -23,10 +23,10 @@ h1=plot(X_initial(1,:),X_initial(2,:),...
     'LineWidth',5,...
     'LineStyle','none');
 legend1 = legend('off');
-legend2=legend([h1(1) h2 h3],'The initial positions','The target','The contact surface')
+legend2=legend([h1(1) h2 h3],'The initial positions','The target','The contact surface');
 set(legend2,'Interpreter','latex','FontSize',20);
 
-disp('Specify the contact position.')
+disp('Specify the contact position.');
 X_contact= ginput(1)';
 
 [~,Distance_i]=min(sum((repmat(X_contact(:,1),1,size(X,2))-X).*...
@@ -35,8 +35,8 @@ X_C=X(:,Distance_i);
 
 
 close all
-disp('Specify the target position.')
-h3=createfigure_with_wall(X(1,:),X(2,:),limits,'Specify the position where the motion leaves the surface by adding one data point on the contact surface.')
+disp('Specify the target position.');
+h3=createfigure_with_wall(X(1,:),X(2,:),limits,'Specify the position where the motion leaves the surface by adding one data point on the contact surface.');
 hold on
 h2=plot(X_target(1,1),X_target(2,1),'MarkerFaceColor',[0 0 1],...
     'MarkerEdgeColor','none',...
@@ -58,10 +58,10 @@ h4=plot(X_C(1,1),X_C(2,1),...
     'Marker','^',...
     'LineStyle','none');
 legend1 = legend('off');
-legend2=legend([h1(1) h2 h3 h4],'The initial positions','The target','The contact surface', 'Desired contact location')
+legend2=legend([h1(1) h2 h3 h4],'The initial positions','The target','The contact surface', 'Desired contact location');
 set(legend2,'Interpreter','latex','FontSize',20);
 
-disp('Specify the position where the motion leaves the surface.')
+disp('Specify the position where the motion leaves the surface.');
 X_leave= ginput(1)';
 
 [~,Distance_i]=min(sum((repmat(X_leave(:,1),1,size(X,2))-X).*...
@@ -74,6 +74,6 @@ h5=plot(X_leave(1,1),X_leave(2,1),...
     'Marker','v',...
     'LineStyle','none');
 legend1 = legend('off');
-legend2=legend([h1(1) h2 h3 h4 h5],'The initial positions','The target','The contact surface', 'Desired contact location', 'Leaving point')
+legend2=legend([h1(1) h2 h3 h4 h5],'The initial positions','The target','The contact surface', 'Desired contact location', 'Leaving point');
 
 pause(1)

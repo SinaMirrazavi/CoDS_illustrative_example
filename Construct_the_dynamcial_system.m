@@ -1,6 +1,6 @@
 function [A,Dem_i,check]=Construct_the_dynamcial_system(N_x,Poly,X_target,limits)
 
-
+clc
 close all
 X(1,:) = linspace(limits(1,1),limits(1,2),10^5);
 X(2,:) = Poly(1)*X+Poly(2);
@@ -54,7 +54,7 @@ else
     check=1;
 end
 Time=sol.solvertime;
-A= value(A);
+A= 10*value(A);
 A = [zeros(d,d)  eye(d,d); A [-2*sqrt(-A(1,1)) 0;0 -2*sqrt(-A(2,2))]];
 % A(1+2,1)=-abs(A(1+2,1))*abs(N_x(1));
 % A(1+2,2)=(A(1+2,2))*abs(N_x(1));
