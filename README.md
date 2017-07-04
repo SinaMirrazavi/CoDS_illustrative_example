@@ -1,2 +1,3 @@
 # CoDS_illuastrative_example
-# CoDS_illuastrative_example
+
+Simply just run the GUI file!
