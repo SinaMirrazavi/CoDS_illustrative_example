@@ -1,18 +1,18 @@
-function plot_the_simualtions(DDX,DX,X,F,Time,Poly,X_initial,X_target,X_C,X_L,N_x,Option)
+function plot_the_simualtions(DDX,DX,X,F,Time,Poly,X_initial,X_target,X_free,X_C,X_L,N_x,Option)
 
 close all
 
 Limits=Option.limits;
 
 if (Option.animation==1)
-    plot_animation(X,Poly,X_initial,X_target,X_C,X_L,Option)
+    plot_animation(X,Poly,X_initial,X_target,X_free,X_C,X_L,Option)
 end
 %%
 screensize = get( 0, 'Screensize' );
 fig = figure();
 subplot1 = subplot(5,2,[1,2,3,4]);
 set(fig,'Position',screensize)
-plot_Wall_counters(subplot1,Poly,X_target,X_C,X_L,Limits)
+plot_Wall_counters(subplot1,Poly,X_free,X_C,X_L,Limits)
 h2=plot(X_target(1,1),X_target(2,1),'MarkerFaceColor',[0 0 1],...
     'MarkerEdgeColor','none',...
     'MarkerSize',30,...
@@ -79,14 +79,14 @@ ylabel('$F[N]$','Interpreter','latex');
 
 
 
-function plot_animation(X,Poly,X_initial,X_target,X_C,X_L,Option)
+function plot_animation(X,Poly,X_initial,X_target,X_free,X_C,X_L,Option)
 Limits=Option.limits;
 close all;
 screensize = get( 0, 'Screensize' );
 fig = figure();
 axes1 = axes('Parent',fig);
 set(fig,'Position',screensize)
-plot_Wall_counters(axes1,Poly,X_target,X_C,X_L,Limits)
+plot_Wall_counters(axes1,Poly,X_free,X_C,X_L,Limits)
 h2=plot(X_target(1,1),X_target(2,1),'MarkerFaceColor',[0 0 1],...
     'MarkerEdgeColor','none',...
     'MarkerSize',30,...

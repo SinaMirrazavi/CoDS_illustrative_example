@@ -1,4 +1,4 @@
-function plot_Wall_counters(subplot1,Poly,X_target,X_C,X_L,Limits)
+function plot_Wall_counters(subplot1,Poly,X_free,X_C,X_L,Limits)
 
 hold(subplot1,'on');
 box(subplot1,'on');
@@ -17,7 +17,7 @@ X2=repmat(X2,1,size(X1,2));
 
 Walla=zeros(size(X2));
 
-Handle_sign=sign(-X_target(2,1)+Poly(1)*X_target(1,1)+Poly(2));
+Handle_sign=sign(-X_free(2,1)+Poly(1)*X_free(1,1)+Poly(2));
 X_mu=(X_C+X_L)/2;
 signal_i=eye(2);
 Q_2=(X_L-X_C);

@@ -1,4 +1,4 @@
-function [A,Dem_i,check]=Construct_the_dynamcial_system(Poly,X_target,option)
+function [A,Dem_i,check]=Construct_the_dynamcial_system(Poly,X_target,X_free,option)
 
 clc
 close all
@@ -22,8 +22,16 @@ plot(X_target(1,1),X_target(2,1),'DisplayName','The target','MarkerFaceColor',[0
     'LineStyle','none');
 legend1 = legend('show');
 set(legend1,'Interpreter','latex','FontSize',20);
-[Data,Dem_i]=generate_mouse_data(limits,1,1,'Draw some motions, make sure that it ends up at the target point and it goes through the contact surface !',fig);
+[Data,Dem_i]=generate_mouse_data(limits,1,1,'Draw some motions at the same side of the target point, make sure that it ends up at the target point and it goes through the contact surface !',fig);
 
+for i=1:size(Dem_i,2)
+    if sign(Poly(1)*X_free(1)+Poly(2)-X_free(2))*(Poly(1)*Dem_i(1,i)+Poly(2)-Dem_i(2,i))<0
+        t = text(limits(1,1),(limits(1,4)+limits(1,3))/2,'ERROR: the demonstrations are started from the inside of the wall');
+        s = t.FontSize;
+        t.FontSize = 20;
+        error('Program exit')
+    end
+end
 d=2;
 C=[];
 
@@ -37,7 +45,7 @@ aux = sdpvar(d,length(diff));
 Fun=sum((sum(aux.^2)));
 C=C+[aux == diff];
 options_solver=sdpsettings('solver','sedumi', ...
-                           'verbose', 0);
+    'verbose', 0);
 sol =  optimize(C,Fun,options_solver);
 if sol.problem~=0
     disp('The optimization did not work. You need to change the solver or start it over!')
