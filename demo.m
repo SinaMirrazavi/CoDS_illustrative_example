@@ -8,7 +8,11 @@ Option.F_d=6;
 Option.delta_dx=-0.5;
 Option.Tfinal=100;
 Option.animation=0;
-
+Option.rho=10;
+Option.omega=0.1;
+Option.nu=0.01;
+Option.Onsurface=0;
+Option.animation=0;
 %% Constructing the conatct surface
 disp('Draw the contact surface')
 [N_x,Poly,X_target,Option.check]=Construct_the_surface(Option);

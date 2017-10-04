@@ -36,8 +36,10 @@ d=2;
 C=[];
 
 Omega1=sdpvar(1,1);
-A = [Omega1 0;0 Omega1];
+Omega2=sdpvar(1,1);
+A = [Omega1 0;0 Omega2];
 C=C+[Omega1<= -0.0001];
+C=C+[Omega2<= -0.0001];
 Fun=(A*Data(1:d,:));
 diff=Fun(1:d,:)-Data(d+1:2*d,:);
 
@@ -54,5 +56,5 @@ else
     disp('The dynamical system is successfully constructed!')
     check=1;
 end
-A= 10*value(A);
+A= 10*[max(value(Omega1),value(Omega2)) 0;0 max(value(Omega1),value(Omega2))];
 A = [zeros(d,d)  eye(d,d); A [-2*sqrt(-A(1,1)) 0;0 -2*sqrt(-A(2,2))]];
