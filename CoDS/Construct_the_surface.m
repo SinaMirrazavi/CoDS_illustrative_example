@@ -1,4 +1,4 @@
-function [N_x,p,X_target,check]=Construct_the_surface(options)
+function [N_x,p,X_target,check,fig]=Construct_the_surface(options)
 
 screensize = get( 0, 'Screensize' );
 fig = figure();
@@ -9,7 +9,8 @@ limits=options.limits;
 p = polyfit(Datat_Wall(1,:),Datat_Wall(2,:),1);
 X(1,:) = linspace(limits(1,1),limits(1,2),10^5);
 X(2,:) = p(1)*X+p(2);
-close all
+% close all
+delete(findobj(gca, 'type', 'line'));;
 pause(0.5)
 disp('Specify the target position.')
 createfigure_with_wall(X(1,:),X(2,:),limits,'Specify the target point by adding one data point to that side.')

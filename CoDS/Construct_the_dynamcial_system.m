@@ -1,13 +1,13 @@
-function [A,Dem_i,check]=Construct_the_dynamcial_system(Poly,X_target,X_free,option)
+function [A,Dem_i,check]=Construct_the_dynamcial_system(Poly,X_target,X_free,option,fig)
 
 clc
-close all
+% close all
 limits=option.limits;
 X(1,:) = linspace(limits(1,1),limits(1,2),10^5);
 X(2,:) = Poly(1)*X+Poly(2);
-screensize = get( 0, 'Screensize' );
-fig = figure();
-set(fig,'Position',screensize)
+% screensize = get( 0, 'Screensize' );
+% fig = figure();
+% set(fig,'Position',screensize)
 plot(X(1,:),X(2,:),'DisplayName','The contact surface','LineWidth',4,...
     'LineStyle','--',...
     'Color',[0 0 0]);

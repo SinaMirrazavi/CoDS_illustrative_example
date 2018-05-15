@@ -1,8 +1,8 @@
 function [X_C,X_leave]=Select_the_contact_point(Poly,X_target,X_initial,option)
 
  limits=option.limits;
-close all
-pause(0.5)
+% close all
+% pause(0.5)
 X(1,:) = linspace(limits(1,1),limits(1,2),100);
 X(2,:) = Poly(1)*X+Poly(2);
 disp('Specify the target position.')
@@ -34,7 +34,7 @@ X_contact= ginput(1)';
 X_C=X(:,Distance_i);
 
 
-close all
+% close all
 disp('Specify the target position.');
 h3=createfigure_with_wall(X(1,:),X(2,:),limits,'Specify the position where the motion leaves the surface by adding one data point on the contact surface.');
 hold on
@@ -86,5 +86,5 @@ h5=plot(X_leave(1,1),X_leave(2,1),...
 legend1 = legend('off');
 legend2=legend([h1(1) h2 h3 h4 h5],'The initial positions','The target','The contact surface', 'Desired contact location', 'Leaving point');
 
-pause(1)
+% pause(1)
 close all
