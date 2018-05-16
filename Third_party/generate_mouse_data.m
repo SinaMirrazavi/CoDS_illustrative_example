@@ -10,13 +10,15 @@ function [data,x_obs_dem_initial] = generate_mouse_data(limits,derivative,filter
 %   # Email: sina.mirrazavi@epfl.com
 
 %% Drawing plot
-view([0 90]);
-disp('Draw some trajectories with the mouse on the figure.')
+% fig = figure();
+% view([0 90]);
 
+disp('Draw some trajectories with the mouse on the figure.')
+% axes('Parent',fig);
 title(Title);
-ylim([limits(3) limits(4)]);
-xlim([limits(1) limits(2)]);
-% axes1 = axes('Parent',fig);
+ ylim([limits(3) limits(4)]);
+ xlim([limits(1) limits(2)]);
+
 box on;
 grid  on;
 hold on;
@@ -31,7 +33,7 @@ demonstration_index = 0;
 demonstration_index_monitor = 0;
 
 % select our figure as gcf
-figure(fig);
+% figure(fig);
 hold on
 % disable any figure modes
 zoom off

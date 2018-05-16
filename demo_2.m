@@ -2,21 +2,21 @@ setup_CoDs;
 
 Option.limits= [-5 5 -5 5];
 Option.check=0;
-Option.Deltat=0.0001;
+Option.Deltat=0.001;
 Option.F_d=6;
 Option.delta_dx=-0.5;
 Option.Tfinal=100;
 Option.animation=0;
 Option.Onsurface=1;
-
+Option.rho=5;
 
 disp('Draw the contact surface')
-[N_x,Poly,X_target,X_free,Option.check]=Construct_the_surface_for_on_surface(Option);
+[N_x,Poly,X_target,X_free,Option.check,fig]=Construct_the_surface_for_on_surface(Option);
 if Option.check==0
     error('Program exit')
 end
 disp('Draw some motions, make sure that it ends up at the target point and it goes through the contact surface !')
-[A,X_initial,Option.check]=Construct_the_dynamcial_system(Poly,X_target,X_free,Option);
+[A,X_initial,Option.check]=Construct_the_dynamcial_system(Poly,X_target,X_free,Option,fig);
 if Option.check==0
     error('Program exit')
 end

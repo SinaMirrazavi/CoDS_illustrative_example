@@ -3,7 +3,7 @@ setup_CoDs;
 
 Option.limits= [-5 5 -5 5];
 Option.check=0;
-Option.Deltat=0.0001;
+Option.Deltat=0.001;
 Option.F_d=6;
 Option.delta_dx=-0.5;
 Option.Tfinal=100;

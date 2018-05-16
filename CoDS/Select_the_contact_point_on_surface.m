@@ -1,12 +1,12 @@
 function [X_C,X_leave]=Select_the_contact_point_on_surface(Poly,X_target,X_initial,option)
 
  limits=option.limits;
-close all
-pause(0.5)
+% close all
+% pause(0.5)
 X(1,:) = linspace(limits(1,1),limits(1,2),100);
 X(2,:) = Poly(1)*X+Poly(2);
 disp('Specify the target position.')
-h3=createfigure_with_wall(X(1,:),X(2,:),limits,'Specify the contact position by adding one data point on the contact surface.');
+h3=createfigure_with_wall(X(1,:),X(2,:),'Specify the contact position by adding one data point on the contact surface.');
 hold on
 h2=plot(X_target(1,1),X_target(2,1),'MarkerFaceColor',[0 0 1],...
     'MarkerEdgeColor','none',...

@@ -10,10 +10,10 @@ p = polyfit(Datat_Wall(1,:),Datat_Wall(2,:),1);
 X(1,:) = linspace(limits(1,1),limits(1,2),10^5);
 X(2,:) = p(1)*X+p(2);
 % close all
-delete(findobj(gca, 'type', 'line'));;
+delete(findobj(gca, 'type', 'line'));
 pause(0.5)
 disp('Specify the target position.')
-createfigure_with_wall(X(1,:),X(2,:),limits,'Specify the target point by adding one data point to that side.')
+createfigure_with_wall(X(1,:),X(2,:),'Specify the target point by adding one data point to that side.')
 X_free= ginput(1)';
 X_target=X_free;
 % X_free=[0 ;0];

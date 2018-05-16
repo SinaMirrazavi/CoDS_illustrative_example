@@ -8,12 +8,12 @@ X(2,:) = Poly(1)*X+Poly(2);
 % screensize = get( 0, 'Screensize' );
 % fig = figure();
 % set(fig,'Position',screensize)
-plot(X(1,:),X(2,:),'DisplayName','The contact surface','LineWidth',4,...
-    'LineStyle','--',...
-    'Color',[0 0 0]);
+% plot(X(1,:),X(2,:),'DisplayName','The contact surface','LineWidth',4,...
+%     'LineStyle','--',...
+%     'Color',[0 0 0]);
 hold on
-xlabel('X(1)','Interpreter','latex');
-ylabel('X(2)','Interpreter','latex');
+% xlabel('X(1)','Interpreter','latex');
+% ylabel('X(2)','Interpreter','latex');
 plot(X_target(1,1),X_target(2,1),'DisplayName','The target','MarkerFaceColor',[0 0 1],...
     'MarkerEdgeColor','none',...
     'MarkerSize',30,...
@@ -22,6 +22,7 @@ plot(X_target(1,1),X_target(2,1),'DisplayName','The target','MarkerFaceColor',[0
     'LineStyle','none');
 legend1 = legend('show');
 set(legend1,'Interpreter','latex','FontSize',20);
+title('');
 [Data,Dem_i]=generate_mouse_data(limits,1,1,'Draw some motions at the same side of the target point, make sure that it ends up at the target point and it goes through the contact surface !',fig);
 
 for i=1:size(Dem_i,2)
