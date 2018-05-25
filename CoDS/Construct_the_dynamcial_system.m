@@ -1,4 +1,4 @@
-function [A,Dem_i,check]=Construct_the_dynamcial_system(Poly,X_target,X_free,option,fig)
+function [A,Dem_i,check]=Construct_the_dynamcial_system(Poly,X_target,X_free,option)
 
 clc
 % close all
@@ -23,7 +23,7 @@ plot(X_target(1,1),X_target(2,1),'DisplayName','The target','MarkerFaceColor',[0
 legend1 = legend('show');
 set(legend1,'Interpreter','latex','FontSize',20);
 title('');
-[Data,Dem_i]=generate_mouse_data(limits,1,1,'Draw some motions at the same side of the target point, make sure that it ends up at the target point and it goes through the contact surface !',fig);
+[Data,Dem_i]=generate_mouse_data(limits,1,1,'Draw some motions at the same side of the target point, make sure that it ends up at the target point and it goes through the contact surface !');
 
 for i=1:size(Dem_i,2)
     if sign(Poly(1)*X_free(1)+Poly(2)-X_free(2))*(Poly(1)*Dem_i(1,i)+Poly(2)-Dem_i(2,i))<0

@@ -87,4 +87,4 @@ legend1 = legend('off');
 legend2=legend([h1(1) h2 h3 h4 h5],'The initial positions','The target','The contact surface', 'Desired contact location', 'Leaving point');
 
 % pause(1)
-close all
+% close all

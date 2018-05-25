@@ -1,4 +1,4 @@
-function [data,x_obs_dem_initial] = generate_mouse_data(limits,derivative,filter,Title,fig)
+function [data,x_obs_dem_initial] = generate_mouse_data(limits,derivative,filter,Title)
 % GENERATE_MOUSE_DATA(NTH_ORDER, N_DOWNSAMPLE) request the user to give
 % demonstrations of a trajectories in a 2D workspace using the mouse cursor
 % The data is stored in an [x ; dx/dt] structure
@@ -22,8 +22,8 @@ title(Title);
 box on;
 grid  on;
 hold on;
-ylabel('X(2)','Interpreter','latex');
-xlabel('X(1)','Interpreter','latex');
+% ylabel('X(2)','Interpreter','latex');
+% xlabel('X(1)','Interpreter','latex');
 delete_trace = 0;
 
 % to store the data
@@ -42,14 +42,15 @@ pan off
 brush off
 datacursormode off
 
-set(fig,'WindowButtonDownFcn',@(h,e)button_clicked(h,e));
-set(fig,'WindowButtonUpFcn',[]);
-set(fig,'WindowButtonMotionFcn',[]);
-set(fig,'Pointer','circle');
+set(gcf,'WindowButtonDownFcn',@(h,e)button_clicked(h,e));
+set(gcf,'WindowButtonUpFcn',[]);
+set(gcf,'WindowButtonMotionFcn',[]);
+set(gcf,'Pointer','circle');
 hp = gobjects(0);
-stop_btn = uicontrol('style','pushbutton','String', 'stop recording','Callback',@stop_recording, ...
-    'position',[0 0 110 25], ...
-    'UserData', 1);
+  stop_btn = uicontrol('style','pushbutton','String', 'stop recording','Callback',@stop_recording, ...
+      'position',[600 140 100 50], ...
+      'UserData', 1);
+% option.stop_record.Visible='on';
 % wait until demonstration is finished
 while( (get(stop_btn, 'UserData') == 1));
     pause(0.1);
@@ -57,14 +58,14 @@ while( (get(stop_btn, 'UserData') == 1));
         x_obs{demonstration_index} = X;
         X = [];
         demonstration_index_monitor = demonstration_index;
-        set(fig,'WindowButtonDownFcn',@(h,e)button_clicked(h,e));
-        set(fig,'WindowButtonUpFcn',[]);
-        set(fig,'WindowButtonMotionFcn',[]);
-        set(fig,'Pointer','circle');
+        set(gcf,'WindowButtonDownFcn',@(h,e)button_clicked(h,e));
+        set(gcf,'WindowButtonUpFcn',[]);
+        set(gcf,'WindowButtonMotionFcn',[]);
+        set(gcf,'Pointer','circle');
     end
 end
 n_demonstrations = demonstration_index_monitor;
-
+delete(stop_btn);
 %% Savitzky-Golay filter and derivatives
 %   x :             input data size (time, dimension)
 %   dt :            sample time
