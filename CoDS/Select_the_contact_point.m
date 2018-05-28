@@ -83,8 +83,8 @@ h5=plot(X_leave(1,1),X_leave(2,1),...
     'MarkerSize',30,...
     'Marker','v',...
     'LineStyle','none');
-legend1 = legend('off');
+legend('off');
 legend2=legend([h1(1) h2 h3 h4 h5],'The initial positions','The target','The contact surface', 'Desired contact location', 'Leaving point');
-
+set(legend2,'Interpreter','latex','FontSize',20);
 % pause(1)
 % close all

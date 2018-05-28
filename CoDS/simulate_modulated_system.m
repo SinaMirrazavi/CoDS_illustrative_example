@@ -12,7 +12,7 @@ end
 
 function [DDX,DX,X,F,Time]=simulate(X_initial,A,X_target,X_free,X_C,X_L,Poly,N_X,option)
 Deltat=option.Deltat;
-F_d=option.F_d;
+% F_d=option.F_d;
 delta_dx=option.delta_dx;
 T=option.Tfinal;
 
@@ -35,12 +35,12 @@ A_1=A(3:4,1:2);
 
 X(:,1)=X_initial(1:2,1);
 DX(:,1)=X_initial(3:4,1);
-X_mu=(X_C+X_L)/2;
-signal_i=eye(2);
+% X_mu=(X_C+X_L)/2;
+% signal_i=eye(2);
 CONTACT=0;
 rho=option.rho;
-Limits=option.limits;
-screensize = get( 0, 'Screensize' );
+% Limits=option.limits;
+% screensize = get( 0, 'Screensize' );
 % fig = figure();
 % subplot1 = subplot(1,1,1);
 % set(fig,'Position',screensize)
@@ -80,7 +80,7 @@ Handle_sign=sign(N_X'*X_free-Wall_Base);
 while ((counter<sizeT))
     
     Q_2=(X_L-X_C);
-    Gamma=Handle_sign*(N_X'*X(:,counter)-Wall_Base)+(rho-(X_L-X_C)'*(X_L-X(:,counter)))*exp(-(X_L-X(:,counter))'*(X_L-X(:,counter)));
+    Gamma=Handle_sign*(N_X'*X(:,counter)-Wall_Base)+(rho-(X_L-X_C)'*(X_L-X(:,counter)))*exp(-option.kamma_slider*(X_L-X(:,counter))'*(X_L-X(:,counter)));
     %     Gamma=((5-exp(-transpose(X(:,counter)-X_mu)*signal_i*(X(:,counter)-X_mu)))/(1+exp(-transpose(X(:,counter)-X_mu)*signal_i*(X(:,counter)-X_mu)))-2)...
     %         *(0.1*Handle_sign*(-X(2,counter)+Poly(1)*X(1,counter)+Poly(2))+exp(-10000*transpose(X_L-X(:,counter))*Q_2));
     %    Gamma=((5-exp(-transpose(X(:,counter)-X_mu)*signal_i*(X(:,counter)-X_mu)))/(1+exp(-transpose(X(:,counter)-X_mu)*signal_i*(X(:,counter)-X_mu)))-2)...

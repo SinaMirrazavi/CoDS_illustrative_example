@@ -1,13 +1,13 @@
-function [N_x,p,X_Target_projections,X_free,check,fig]=Construct_the_surface_for_on_surface(options)
+function [N_x,p,X_Target_projections,X_free,check]=Construct_the_surface_for_on_surface(options)
 
-screensize = get( 0, 'Screensize' );
- fig = figure();
+% screensize = get( 0, 'Screensize' );
+%  fig = figure();
 %  axes(options.Figure);
- set(fig,'Position',screensize)
+%  set(fig,'Position',screensize)
 limits=options.limits;
 % fig=options.Figure;
- limits=[limits(1) limits(2) limits(3) limits(4)];
-[Datat_Wall,~]=generate_mouse_data(limits,0,0,'Draw the wall',fig);
+%  limits=[limits(1) limits(2) limits(3) limits(4)];
+[Datat_Wall,~]=generate_mouse_data(limits,0,0,'Draw the wall');
 p = polyfit(Datat_Wall(1,:),Datat_Wall(2,:),1);
 X(1,:) = linspace(limits(1,1),limits(1,2),10^5);
 X(2,:) = p(1)*X+p(2);

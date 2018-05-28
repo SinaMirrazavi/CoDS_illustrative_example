@@ -48,7 +48,7 @@ set(gcf,'WindowButtonMotionFcn',[]);
 set(gcf,'Pointer','circle');
 hp = gobjects(0);
   stop_btn = uicontrol('style','pushbutton','String', 'stop recording','Callback',@stop_recording, ...
-      'position',[600 140 100 50], ...
+      'position',[1350 432 300 100], ...
       'UserData', 1);
 % option.stop_record.Visible='on';
 % wait until demonstration is finished
@@ -66,6 +66,7 @@ while( (get(stop_btn, 'UserData') == 1));
 end
 n_demonstrations = demonstration_index_monitor;
 delete(stop_btn);
+set(gcf,'Pointer','arrow');
 %% Savitzky-Golay filter and derivatives
 %   x :             input data size (time, dimension)
 %   dt :            sample time

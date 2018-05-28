@@ -1,6 +1,6 @@
 function plot_the_simualtions(DDX,DX,X,F,Time,Poly,X_initial,X_target,X_free,X_C,X_L,N_x,Option)
 
-close all
+% close all
 
 Limits=Option.limits;
 
@@ -8,11 +8,39 @@ if (Option.animation==1)
     plot_animation(X,Poly,X_initial,X_target,X_free,X_C,X_L,N_x,Option)
 end
 %%
-screensize = get( 0, 'Screensize' );
-fig = figure();
-subplot1 = subplot(1,1,1);
-set(fig,'Position',screensize)
-plot_Wall_counters(subplot1,N_x,X_free,X_C,X_L,Option.rho,Limits)
+% screensize = get( 0, 'Screensize' );
+% fig = figure();
+% subplot1 = subplot(1,1,1);
+% set(fig,'Position',screensize)
+cla
+X1=[ Option.axes1.XLim(1):0.05: Option.axes1.XLim(2)];
+X2=[ Option.axes1.YLim(1):0.05: Option.axes1.YLim(2)]';
+
+X1=repmat(X1,size(X2,1),1);
+X2=repmat(X2,1,size(X1,2));
+Walla=zeros(size(X2));
+Wall_Base=Option.N_x'*Option.X_C;
+
+Handle_sign=sign(Option.N_x'*Option.X_free);
+for ii=1:size(X2,1),
+    for jj=1:size(X2,2)
+        XX=[X1(ii,jj);X2(ii,jj)];
+        Walla(ii,jj)=Handle_sign*(Option.N_x'*XX-Wall_Base)+...
+            (Option.rho-(Option.X_L-Option.X_C)'*(Option.X_L-XX))*exp(-Option.kamma_slider*(Option.X_L-XX)'*(Option.X_L-XX));
+        if  Option.rho<(Walla(ii,jj))
+            Walla(ii,jj)=Option.rho;
+        end
+        if Walla(ii,jj)<-2
+            Walla(ii,jj)=-2;
+        end
+    end
+end
+clim=[-2 Option.rho];
+hold on
+contourf(X1,X2,Walla);
+colormap(hot);
+
+% plot_Wall_counters(subplot1,N_x,X_free,X_C,X_L,Option.rho,Limits)
 h2=plot(X_target(1,1),X_target(2,1),'MarkerFaceColor',[0 0 1],...
     'MarkerEdgeColor','none',...
     'MarkerSize',30,...
@@ -48,6 +76,9 @@ if Option.Onsurface==0
         'Marker','v',...
         'LineStyle','none');
 end
+grid on 
+box on
+
 
 % legend2=legend([h1(1) h2 h3 h4 h5 h8{i}],'The initial positions','The target','The contact surface', 'Desired contact location', 'Leaving point','Executed motion');
 % set(legend2,'Orientation','vertical','Location','best');
@@ -84,12 +115,40 @@ end
 
 function plot_animation(X,Poly,X_initial,X_target,X_free,X_C,X_L,N_x,Option)
 Limits=Option.limits;
-close all;
-screensize = get( 0, 'Screensize' );
-fig = figure();
-axes1 = axes('Parent',fig);
-set(fig,'Position',screensize)
-plot_Wall_counters(axes1,N_x,X_free,X_C,X_L,Option.rho,Limits)
+% close all;
+% screensize = get( 0, 'Screensize' );
+% fig = figure();
+% axes1 = axes('Parent',fig);
+% set(fig,'Position',screensize)
+% plot_Wall_counters(axes1,N_x,X_free,X_C,X_L,Option.rho,Limits)
+X1=[ Option.axes1.XLim(1):0.05: Option.axes1.XLim(2)];
+X2=[ Option.axes1.YLim(1):0.05: Option.axes1.YLim(2)]';
+cla
+legend('off');
+X1=repmat(X1,size(X2,1),1);
+X2=repmat(X2,1,size(X1,2));
+Walla=zeros(size(X2));
+Wall_Base=Option.N_x'*Option.X_C;
+
+Handle_sign=sign(Option.N_x'*Option.X_free);
+for ii=1:size(X2,1),
+    for jj=1:size(X2,2)
+        XX=[X1(ii,jj);X2(ii,jj)];
+        Walla(ii,jj)=Handle_sign*(Option.N_x'*XX-Wall_Base)+...
+            (Option.rho-(Option.X_L-Option.X_C)'*(Option.X_L-XX))*exp(-Option.kamma_slider*(Option.X_L-XX)'*(Option.X_L-XX));
+        if  Option.rho<(Walla(ii,jj))
+            Walla(ii,jj)=Option.rho;
+        end
+        if Walla(ii,jj)<-2
+            Walla(ii,jj)=-2;
+        end
+    end
+end
+clim=[-2 Option.rho];
+contourf(X1,X2,Walla);
+colormap(hot);
+hold on
+
 h2=plot(X_target(1,1),X_target(2,1),'MarkerFaceColor',[0 0 1],...
     'MarkerEdgeColor','none',...
     'MarkerSize',30,...
