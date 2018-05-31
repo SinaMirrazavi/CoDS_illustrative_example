@@ -73,10 +73,10 @@ X_leave=X(:,Distance_i);
 X_Target_projections=X(:,Distance_i);
 Q_2=(X(:,1)-X(:,end))/norm(X(:,1)-X(:,end));
 
-if (abs(Q_2'*(X_C-X_Target_projections))<abs(Q_2'*(X_C-X_leave)))
-    disp('The leaving position can not be further than the projection of the target on the surface.')
-    X_leave=X_Target_projections+0.2*(X_C-X_Target_projections);
-end
+% if (abs(Q_2'*(X_C-X_Target_projections))<abs(Q_2'*(X_C-X_leave)))
+%     disp('The leaving position can not be further than the projection of the target on the surface.')
+%     X_leave=X_Target_projections+0.2*(X_C-X_Target_projections);
+% end
 
 h5=plot(X_leave(1,1),X_leave(2,1),...
     'MarkerFaceColor',[1 0 0],...
