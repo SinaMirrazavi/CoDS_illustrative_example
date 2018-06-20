@@ -1,4 +1,4 @@
-# CoDS_illuastrative_example
+# CoDS illustrative example
 
 The core idea  of having this package is to provide a simple and flexible tool for the curious readers to assess the performance  of DS based contact controller which was proposed in
 
