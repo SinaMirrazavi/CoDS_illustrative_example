@@ -13,9 +13,9 @@ You can find a use case study of this here:
 
 
 # How to run
-It is very simple! You just need to run the GUI file! See teh follwoign example:
+It is very simple! You just need to run the GUI file! See the following example:
+[https://www.youtube.com/embed/eAcXKDPbpZg](https://www.youtube.com/embed/eAcXKDPbpZg)
 
-<p><iframe src="https://www.youtube.com/embed/eAcXKDPbpZg" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>
 
 
 # Which version?
