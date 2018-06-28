@@ -13,13 +13,18 @@ You can find a use case study of this here:
 
 
 # How to run
-It is very simple! You just need to run the GUI file!
+It is very simple! You just need to run the GUI file! See the following example:
+[https://www.youtube.com/embed/eAcXKDPbpZg](https://www.youtube.com/embed/eAcXKDPbpZg)
+
 
 
 # Which version?
-Yes, there are several branches and different commits. The stable and the final one is  [THIS ONE](https://github.com/sinamr66/CoDS_illuastrative_example/tree/GUI_guid).
-
+Yes, there are several branches and different commits. The stable and the final one is  [THIS ONE](https://github.com/sinamr66/CoDS_illuastrative_example/tree/GUI_guid):
+```
+git clone https://github.com/sinamr66/CoDS_illustrative_example.git
+git checkout GUI_guid
+```
 
 
 # Contact information
-For more information contact Sina Mirrazavi.
+For more information contact <strong><a href="http://lasa.epfl.ch/people/member.php?SCIPER=233855"> Sina Mirrazavi</a>.</strong>
