@@ -25,6 +25,14 @@ git clone https://github.com/sinamr66/CoDS_illustrative_example.git
 git checkout GUI_guid
 ```
 
+# Dependences 
+
+This package is dependent on Yalmip and Sedumi. Both are already been included. You can find the latest version of these two packages here:
+
+https://github.com/yalmip/YALMIP <br />
+http://sedumi.ie.lehigh.edu/
 
 # Contact information
 For more information contact <strong><a href="http://lasa.epfl.ch/people/member.php?SCIPER=233855"> Sina Mirrazavi</a>.</strong>
+
+
