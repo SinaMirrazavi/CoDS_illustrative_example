@@ -20,7 +20,7 @@ disp('Draw the contact surface')
 plot_the_simualtions_ellipsoid(X_modulated,Center,Radiusx,Radiusy,Target,Option);
     
 %%
-for i=1:size(DX_G,2)
+for i=1:size(DX_G,2) 
     DX_G{i}=DX_G{i}(DX_G{i}~=0);
     Dcontact(i)=DX_G{i}(end);
 end
