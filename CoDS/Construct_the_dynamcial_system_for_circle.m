@@ -1,4 +1,4 @@
-function [A,Dem_i,check]=Construct_the_dynamcial_system_for_circle(Target,Center,Radius,Option)
+function [A,Dem_i,check]=Construct_the_dynamcial_system_for_circle(Center,Radius,Option)
 
 clc
 limits=Option.limits;

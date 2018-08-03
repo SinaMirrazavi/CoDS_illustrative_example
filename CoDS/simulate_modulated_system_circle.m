@@ -105,7 +105,7 @@ else
     CONTACT=0;
 end
 rho=rho*rho+2*Radius*rho;
-Deltaq_1=DX'*[2 0;2 0]*DX;
+Deltaq_1=DX'*[2 0;0 2]*DX;
 % Deltaq_1=0;
 nu=0.05;
 f1=transpose(f_x)*q1/(transpose(f_x)*f_x);
