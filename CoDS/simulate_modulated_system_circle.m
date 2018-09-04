@@ -40,7 +40,6 @@ A_2=A(3:4,3:4);
 A_1=A(3:4,1:2);
 X(:,1)=X_initial(1:2,1);
 DX(:,1)=zeros(2,size(X_initial,2));
-%  DX(:,1)=X_initial(3:4,1);
 CONTACT=0;
 rho=option.rho;
 
@@ -52,11 +51,7 @@ while ((counter<sizeT))
     q2=[-q1(2);q1(1)];
     Q=[q1 q2;];
     Qinv=inv(Q);
-%     if CONTACT
-%         f_x=SE(DX(:,counter),X(:,counter),A_1,A_2,X_target);
-%     else
         f_x=SE(DX(:,counter),X(:,counter),A_1,A_2,X_target);
-%     end
     [M,~,CONTACT]=Modulation(Gamma,Radius,f_x,DX(:,counter),delta_dx,rho,q1,q2,Q,Qinv,CONTACT);
     
     if (Gamma <=0)
@@ -100,14 +95,13 @@ epsilon=5;
 omega=100;
 if Contact==1
     CONTACT=1;
-%     omega=1;
 else
     CONTACT=0;
 end
 rho=rho*rho+2*Radius*rho;
 Deltaq_1=DX'*[2 0;0 2]*DX;
 % Deltaq_1=0;
-nu=0.05;
+nu=-delta_dx/2;
 f1=transpose(f_x)*q1/(transpose(f_x)*f_x);
 f2=transpose(f_x)*q2/(transpose(f_x)*f_x);
     lambda(3) =0;
@@ -120,12 +114,8 @@ elseif (0<Gamma)&&(Gamma<rho)
         lambda(1) =(Deltaq_1-omega*(DX_G-(delta_dx+nu)))*f1;
         lambda(2) =(Deltaq_1-omega*(DX_G-(delta_dx+nu)))*f2;
     elseif (((delta_dx<=DX_G))&&(DX_G<=0))
-                lambda(1) =0;
-        lambda(2) =0;
         lambda(1) =(Deltaq_1+(omega*omega*Gamma+nu*omega)*DX_G/delta_dx-omega*omega*Gamma)*f1;
         lambda(2) =(Deltaq_1+(omega*omega*Gamma+nu*omega)*DX_G/delta_dx-omega*omega*Gamma)*f2;
-% %          lambda(1) =(Deltaq_1-omega*(DX_G*nu/delta_dx+omega*(1-DX_G/delta_dx)*Gamma))*f1;
-% %          lambda(2) =(Deltaq_1-omega*(DX_G*nu/delta_dx+omega*(1-DX_G/delta_dx)*Gamma))*f2;
     else
         lambda(1) =(Deltaq_1-2*omega*DX_G-omega*omega*Gamma)*f1;
         lambda(2) =(Deltaq_1-2*omega*DX_G-omega*omega*Gamma)*f2;

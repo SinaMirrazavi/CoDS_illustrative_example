@@ -1,4 +1,4 @@
-function plot_the_simualtions_circle(X,DX,X_initial,Center,Radius,Target,Option)
+function plot_animation_circle(X,DX,X_initial,Center,Radius,Target,Option)
 
 close all
 
@@ -57,7 +57,7 @@ patch([xout,xin],[yout,yin],'g','linestyle','none','FaceAlpha',0.3,'DisplayName'
 
 
 i=1;
- plot(smooth(X{i}(1,:)),smooth(X{i}(2,:)),'LineWidth',2,'Color',[0 0.447058826684952 0.74117648601532],'DisplayName','Executed motion');
+ plot(smooth(X{i}(1,1:2)),smooth(X{i}(2,1:2)),'LineWidth',2,'Color',[0 0.447058826684952 0.74117648601532],'DisplayName','Executed motion');
  plot(smooth(X{i}(1,1)),smooth(X{i}(2,1)),'DisplayName','Initial Position',...
     'MarkerFaceColor',[0 0.447058826684952 0.74117648601532],...
     'MarkerEdgeColor',[0 0.447058826684952 0.74117648601532],...
@@ -66,14 +66,12 @@ i=1;
     'LineStyle','none',...
     'Color',[0 0.447058826684952 0.74117648601532]);
 legend1 = legend(axes1,'show');
- un=smooth(DX{i}(1,1:10:end))./sqrt(smooth(DX{i}(1,1:10:end)).^2+smooth(DX{i}(2,1:10:end)).^2);
- wn=smooth(DX{i}(2,1:10:end))./sqrt(smooth(DX{i}(1,1:10:end)).^2+smooth(DX{i}(2,1:10:end)).^2);
- quiver(smooth(X{i}(1,1:10:end)),smooth(X{i}(2,1:10:end)),un,wn,0.25)
+%  un=smooth(DX{i}(1,1:10:end))./sqrt(smooth(DX{i}(1,1:10:end)).^2+smooth(DX{i}(2,1:10:end)).^2);
+%  wn=smooth(DX{i}(2,1:10:end))./sqrt(smooth(DX{i}(1,1:10:end)).^2+smooth(DX{i}(2,1:10:end)).^2);
+%  quiver(smooth(X{i}(1,1:10:end)),smooth(X{i}(2,1:10:end)),un,wn,0.25)
 set(legend1,'Interpreter','latex');
 
-for i=1:size(X,2)
-    
-    plot(smooth(X{i}(1,:)),smooth(X{i}(2,:)),'LineWidth',2,'Color',[0 0.447058826684952 0.74117648601532]);
+for i=1:size(X,2) 
      plot(smooth(X{i}(1,1)),smooth(X{i}(2,1)),'DisplayName','Initial Position',...
     'MarkerFaceColor',[0 0.447058826684952 0.74117648601532],...
     'MarkerEdgeColor',[0 0.447058826684952 0.74117648601532],...
@@ -82,3 +80,34 @@ for i=1:size(X,2)
     'LineStyle','none',...
     'Color',[0 0.447058826684952 0.74117648601532]);
 end
+
+SIZE=size(X{1},2);
+for i=1:size(X,2)
+    counter{i}=1;
+end
+n=1;
+v = VideoWriter('Circle.mp4');
+open(v);
+pause(5)
+while counter{1}<SIZE
+    for i=1:size(X,2)
+        counter{i}=min(int64(counter{i}+size(X{i},2)/100),size(X{i},2));
+    end
+    for i=1:size(X,2)
+        plot(smooth(X{i}(1,1:counter{i})),smooth(X{i}(2,1:counter{i})),'LineWidth',2,'Color',[0 0.447058826684952 0.74117648601532]);
+    end
+    % Capture the plot as an image
+    frame = getframe(figure1);
+    writeVideo(v,frame);
+    %       im = frame2im(frame);
+    %       [imind,cm] = rgb2ind(im,256);
+    %
+    %       % Write to the GIF File
+    %       if n == 1
+    %           imwrite(imind,cm,filename,'gif', 'Loopcount',inf);
+    %       else
+    %           imwrite(imind,cm,filename,'gif','WriteMode','append');
+    %       end
+    n=n+1;
+end
+close(v);
