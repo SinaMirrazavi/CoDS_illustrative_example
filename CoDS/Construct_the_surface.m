@@ -5,7 +5,9 @@ function [N_x,p,X_target,check]=Construct_the_surface(options)
 % set(fig,'Position',screensize)
 limits=options.limits;
 % limits=[limits(1) limits(2) 0 limits(4)];
+ legend('off');
 [Datat_Wall,~]=generate_mouse_data(limits,0,0,'Draw the wall');
+ legend('show');
 p = polyfit(Datat_Wall(1,:),Datat_Wall(2,:),1);
 X(1,:) = linspace(limits(1,1),limits(1,2),10^5);
 X(2,:) = p(1)*X+p(2);
